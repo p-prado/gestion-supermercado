@@ -49,6 +49,10 @@ a:hover {
     color: var(--color-secondary-active);
 }
 
+h1 {
+    margin-block: 4rem 2rem;
+}
+
 /* CONTAINERS */
 
 .container {
@@ -59,7 +63,12 @@ a:hover {
 
 /* BUTTONS */
 
+.button-primary,
+.button-primary-outline,
+.button-secondary,
+.button-secondary-outline,
 button {
+    display: inline-block;
     padding: 0.75rem 1rem;
     margin: 2rem 0;
     border: 0.25rem solid transparent;
