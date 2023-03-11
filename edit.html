@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Product</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h2 class="logo">P-Mart</h2>
+        </div>
+    </header>
+    <div class="container">
+        <h1>Edit product:</h1>
+        <div class="form-wrapper">
+            <form>
+                <div class="input-row">
+                    <div class="input-group">
+                        <label for="sku">SKU:</label>
+                        <input type="text" name="sku" id="skuControl">
+                    </div>
+                    <div class="input-group">
+                        <label for="name">Name:</label>
+                        <input type="text" name="name" id="nameControl">
+                    </div>
+                    <div class="input-group">
+                        <label for="description">Description:</label>
+                        <textarea name="description" id="descriptionControl"></textarea>
+                    </div>
+                    <div class="input-group">
+                        <label for="category">Category:</label>
+                        <input type="text" name="category" id="categoryControl">
+                    </div>
+                    <div class="input-group">
+                        <label for="stock">Stock:</label>
+                        <input type="number" name="stock" id="stockControl">
+                    </div>
+                </div>
+                <button type="submit" class="button-secondary">Save Changes</button>
+                <button>Clear Changes</button>
+            </form>
+        </div>
+    </div>
+    <footer>
+        <div class="container">
+            <p>P-Mart &copy; 2023 | Designed and Developed by <a href="#">Pablo Prado</a></p>
+        </div>
+    </footer>
+</body>
+</html>

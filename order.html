@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Order</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h2 class="logo">P-Mart</h2>
+        </div>
+    </header>
+    <div class="container">
+        <h1>New Order:</h1>
+        <div class="form-wrapper">
+            <form>
+                <div class="input-row">
+                    <div class="input-group">
+                        <label for="sku">SKU:</label>
+                        <input type="text" name="sku" id="skuControl" value="SKU" disabled>
+                    </div>
+                    <div class="input-group">
+                        <label for="name">Name:</label>
+                        <input type="text" name="name" id="nameControl" value="Pencil" disabled>
+                    </div>
+                    <div class="input-group">
+                        <label for="description">Provider:</label>
+                        <select name="provider" id="providerControl">
+                            <option value="Provider1">Provider 1</option>
+                            <option value="Provider2">Provider 2</option>
+                            <option value="Provider3">Provider 3</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="qty">Quantity:</label>
+                        <input type="number" name="qty" id="qtyControl">
+                    </div>
+                </div>
+                <button type="submit" class="button-secondary">Submit Order</button>
+            </form>
+        </div>
+    </div>
+    <footer>
+        <div class="container">
+            <p>P-Mart &copy; 2023 | Designed and Developed by <a href="#">Pablo Prado</a></p>
+        </div>
+    </footer>
+</body>
+</html>
