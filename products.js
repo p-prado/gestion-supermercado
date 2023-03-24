@@ -30,9 +30,13 @@ window.addEventListener("load", () => {
 
   newOrderButton.addEventListener("click", () => {
     window.comm.newOrderButtonClick(selectedProduct);
-    console.log("Logging from Event Listener");
+  });
+
+  editButton.addEventListener("click", () => {
+    window.comm.editButtonClick(selectedProduct);
   });
 });
+
 
 function getProductObject(productArray) {
   let productObject = {

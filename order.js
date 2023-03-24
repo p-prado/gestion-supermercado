@@ -5,7 +5,6 @@ window.addEventListener('load', ()=> {
     const providerControl = document.getElementById("providerControl");
     const qtyControl = document.getElementById("qtyControl");
 
-
     window.comm.newOrderWindow(function (event, product) {
         console.log('LOGGING FROM ORDER JS WINDOW.COMM.NEWORDERWINDOW(...)');
         console.log(product);
