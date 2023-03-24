@@ -4,6 +4,10 @@
     padding: 0;
 }
 
+body{
+    min-height: 100%;
+}
+
 input,
 button,
 select,
@@ -145,11 +149,19 @@ table th {
     padding-inline: 0.5rem;
 }
 
+table tbody tr {
+    cursor: pointer;
+}
+
 table tr:nth-child(even) {
     background-color: var(--color-background-light);
 }
 
-table tr:hover {
+table tr.selected {
+    background-color: var(--color-secondary-active);
+}
+
+table tr:hover:not(.selected) {
     background-color: var(--color-secondary-light);
 }
 
