@@ -35,5 +35,7 @@ app.whenReady().then(createWindow);
 ipcMain.on('newOrderButtonClick', function(event, product){
     console.log(product);
     createOrderWindow();
-    orderWindow.webContents.send('newOrderWindow', product);
+    orderWindow.webContents.on('did-finish-load', function(){
+        orderWindow.webContents.send('newOrderWindow', product);
+    })
 });
