@@ -57,7 +57,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `supermercado`.`pedido` ;
 
 CREATE TABLE IF NOT EXISTS `supermercado`.`pedido` (
-  `idpedido` INT NOT NULL,
+  `idpedido` INT NOT NULL AUTO_INCREMENT,
   `sku` INT NOT NULL,
   `cantidad` INT NOT NULL,
   `idproveedor` INT NOT NULL,

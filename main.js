@@ -61,12 +61,11 @@ ipcMain.on('newOrderButtonClick', function (event, product) {
         'SELECT proveedor_has_producto.sku, proveedor.idproveedor, proveedor.nombre FROM proveedor_has_producto JOIN proveedor ON proveedor_has_producto.idproveedor = proveedor.idproveedor WHERE sku = ?;',
         [product.sku],
         function (err, results) {
-            console.log(product, results);
             if (err) {
                 console.log(err);
             } else {
                 createOrderWindow();
-                orderWindow.webContents.on('did-finish-load', function (results) {
+                orderWindow.webContents.on('did-finish-load', function (event) {
                     // Send product info and providers
                     orderWindow.webContents.send('newOrderWindow', product, results);
                 });
@@ -75,7 +74,6 @@ ipcMain.on('newOrderButtonClick', function (event, product) {
 });
 
 ipcMain.on('editButtonClick', function (event, product) {
-    console.log(product);
     createEditWindow();
     editWindow.webContents.on('did-finish-load', function () {
         editWindow.webContents.send('newEditWindow', product);
@@ -100,7 +98,6 @@ ipcMain.on('validateLogin', function (event, email, password) {
                     console.log("No user found for that email.");
                 } else {
                     // If the email was found in the database, check if the password matches.s
-                    console.log(results);
                     if (password === results[0].password) {
                         // If the password doesn't match, show error.
                         console.log("Successfull login!");
@@ -142,11 +139,14 @@ ipcMain.on('updateProduct', function (event, product) {
 
 ipcMain.on('insertNewOrder', function (event, order) {
     connection.query(
-        'INSERT INTO pedido (sku, cantidad, proveedor) VALUES (?,?,?)',
+        'INSERT INTO pedido (sku, cantidad, idproveedor) VALUES (?,?,?)',
         [order.sku, order.quantity, order.provider],
         function (err) {
             if (err) {
                 console.log(err);
+            } else {
+                console.log("Successfully inserted new order into database!");
+                orderWindow.close();
             }
         }
     )

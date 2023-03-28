@@ -8,12 +8,14 @@ window.addEventListener('load', ()=> {
 
     window.comm.newOrderWindow(function (event, product, providers) {
         console.log(product);
+        console.log(providers);
+        console.log(event);
         skuControl.value = product.sku;
         nameControl.value = product.name;
         providers.forEach(provider => {
-            providerControl.insertAdjacentElement(
+            providerControl.insertAdjacentHTML(
                 "beforeend",
-                `<option value="${provider.id}">${provider.idproveedor} - ${provider.nombre}</option>`
+                `<option value="${provider.idproveedor}">${provider.idproveedor} - ${provider.nombre}</option>`
                 );
         });
     });
