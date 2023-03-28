@@ -18,11 +18,10 @@ function createWindow() {
         webPreferences: {
             nodeIntegration: true,
             //   contextIsolation: false,
-            preload: path.join(__dirname, 'preload.js')
+            preload: path.join(__dirname,'js', 'preload.js')
         }
     });
-    // mainWindow.loadFile("login.html");
-    mainWindow.loadFile("products.html");
+    mainWindow.loadFile("views/login.html");
 }
 
 // Create new order window
@@ -37,7 +36,7 @@ function createOrderWindow() {
             preload: path.join(app.getAppPath(), 'preload.js')
         }
     });
-    orderWindow.loadFile('order.html');
+    orderWindow.loadFile('views/order.html');
 }
 
 let editWindow;
@@ -48,10 +47,10 @@ function createEditWindow() {
         width: 700,
         height: 550,
         webPreferences: {
-            preload: path.join(app.getAppPath(), 'preload.js')
+            preload: path.join(app.getAppPath(),'js', 'preload.js')
         }
     });
-    editWindow.loadFile('edit.html');
+    editWindow.loadFile('views/edit.html');
 }
 
 app.whenReady().then(createWindow);
@@ -101,7 +100,7 @@ ipcMain.on('validateLogin', function (event, email, password) {
                     if (password === results[0].password) {
                         // If the password doesn't match, show error.
                         console.log("Successfull login!");
-                        mainWindow.loadFile("products.html");
+                        mainWindow.loadFile("views/products.html");
                     } else {
                         // If the passwords match, load the products page.
                         console.log("Login failed. Wrong password.");
