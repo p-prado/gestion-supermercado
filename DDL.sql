@@ -14,12 +14,13 @@ USE `supermercado` ;
 -- -----------------------------------------------------
 -- Table `supermercado`.`empleado`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `supermercado`.`empleado` ;
+DROP TABLE IF EXISTS `supermercado`.`empleado`;
 
 CREATE TABLE IF NOT EXISTS `supermercado`.`empleado` (
+  `idempleado` INT AUTO_INCREMENT NOT NULL,
   `email` VARCHAR(25) NOT NULL,
   `password` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`email`))
+  PRIMARY KEY (`idempleado`))
 ENGINE = InnoDB;
 
 

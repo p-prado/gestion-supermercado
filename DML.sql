@@ -1,6 +1,6 @@
 -- DATA MANIPULATION: CREATE SAMPLE VALUES FOR DATABASE
 
-INSERT INTO empleado VALUES ("pablo@example.com", "pablo"), ("james@example.com", "james");
+INSERT INTO empleado (email, password) VALUES ("pablo@example.com", "pablo"), ("james@example.com", "james");
 
 INSERT INTO producto VALUES
 	(1, "Pencil - Pack of 10", "Bic pencils 10-pack", "Home & Office", 27),
