@@ -18,7 +18,19 @@ window.addEventListener('load', ()=> {
         stockControl.value = product.stock;
     });
 
+
     cancelButton.addEventListener("click", function(){
         window.comm.backToProductsWindow();
+    });
+
+    saveButton.addEventListener("click", function(){
+        let updatedProduct = {
+            "sku": skuControl.value,
+            "name": nameControl.value,
+            "description": descriptionControl.value,
+            "category": categoryControl.value,
+            "stock": stockControl.value
+        };
+        window.comm.updateProduct(updatedProduct);
     })
 })    

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Log In</title>
     <link rel="stylesheet" href="styles/style.css">
+    <script src="login.js"></script>
 </head>
 <body>
     <header>
@@ -16,17 +17,17 @@
     <div class="container">
         <h1>Log In</h1>
         <div class="form-wrapper">
-            <form>
-                <div class="input-group">
-                    <label for="email">Email:</label>
-                    <input type="email" name="email" id="emailControl">
-                </div>
-                <div class="input-group">
-                    <label for="password">Password:</label>
-                    <input type="password" name="password" id="passwordControl">
-                </div>
-                <a href="products.html" type="submit" class="button-secondary">Log In</a>
-            </form>
+                <form id="loginForm">
+                    <div class="input-group">
+                        <label for="email">Email:</label>
+                        <input type="text" name="email" id="emailControl">
+                    </div>
+                    <div class="input-group">
+                        <label for="password">Password:</label>
+                        <input type="password" name="password" id="passControl">
+                    </div>
+                    <button type="submit" class="button-secondary" id="loginButton">Log In</button>
+                </form>
         </div>
     </div>
     <footer>

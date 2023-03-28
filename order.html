@@ -17,7 +17,7 @@
     <div class="container">
         <h1 id="title">New Order:</h1>
         <div class="form-wrapper">
-            <form>
+            <form id="orderForm">
                 <div class="input-row">
                     <div class="input-group">
                         <label for="sku">SKU:</label>
@@ -30,9 +30,9 @@
                     <div class="input-group">
                         <label for="description">Provider:</label>
                         <select name="provider" id="providerControl">
-                            <option value="Provider1">Provider 1</option>
-                            <option value="Provider2">Provider 2</option>
-                            <option value="Provider3">Provider 3</option>
+                            <option value="Provider1"><span class="providerId">1</span> Provider 1</option>
+                            <option value="Provider2"><span class="providerId">2</span> Provider 2</option>
+                            <option value="Provider3"><span class="providerId">3</span> Provider 3</option>
                         </select>
                     </div>
                     <div class="input-group">
@@ -40,7 +40,7 @@
                         <input type="number" name="qty" id="qtyControl">
                     </div>
                 </div>
-                <a href="products.html" type="submit" class="button-secondary">Submit Order</a>
+                <button type="submit" class="button-secondary">Submit Order</button>
             </form>
         </div>
     </div>

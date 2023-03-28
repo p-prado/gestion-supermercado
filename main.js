@@ -1,9 +1,18 @@
 const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
+const mysql = require('mysql2');
 
-let window;
+// Create the connection to database
+const connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: 'root',
+    database: 'supermercado'
+});
+
+let mainWindow;
 function createWindow() {
-    window = new BrowserWindow({
+    mainWindow = new BrowserWindow({
         width: 800,
         height: 600,
         webPreferences: {
@@ -12,14 +21,15 @@ function createWindow() {
             preload: path.join(__dirname, 'preload.js')
         }
     });
-    window.loadFile("products.html");
+    // mainWindow.loadFile("login.html");
+    mainWindow.loadFile("products.html");
 }
 
 // Create new order window
 let orderWindow;
 function createOrderWindow() {
     orderWindow = new BrowserWindow({
-        parent: window,
+        parent: mainWindow,
         modal: true,
         width: 700,
         height: 550,
@@ -33,7 +43,7 @@ function createOrderWindow() {
 let editWindow;
 function createEditWindow() {
     editWindow = new BrowserWindow({
-        parent: window,
+        parent: mainWindow,
         modal: true,
         width: 700,
         height: 550,
@@ -47,11 +57,21 @@ function createEditWindow() {
 app.whenReady().then(createWindow);
 
 ipcMain.on('newOrderButtonClick', function (event, product) {
-    console.log(product);
-    createOrderWindow();
-    orderWindow.webContents.on('did-finish-load', function () {
-        orderWindow.webContents.send('newOrderWindow', product);
-    });
+    connection.query(
+        'SELECT proveedor_has_producto.sku, proveedor.idproveedor, proveedor.nombre FROM proveedor_has_producto JOIN proveedor ON proveedor_has_producto.idproveedor = proveedor.idproveedor WHERE sku = ?;',
+        [product.sku],
+        function (err, results) {
+            console.log(product, results);
+            if (err) {
+                console.log(err);
+            } else {
+                createOrderWindow();
+                orderWindow.webContents.on('did-finish-load', function (results) {
+                    // Send product info and providers
+                    orderWindow.webContents.send('newOrderWindow', product, results);
+                });
+            }
+        });
 });
 
 ipcMain.on('editButtonClick', function (event, product) {
@@ -62,6 +82,72 @@ ipcMain.on('editButtonClick', function (event, product) {
     });
 });
 
-ipcMain.on('backToProductsWindow', function(){
+ipcMain.on('backToProductsWindow', function () {
     editWindow.close();
+})
+
+// Validate login
+ipcMain.on('validateLogin', function (event, email, password) {
+    connection.query(
+        'SELECT * FROM empleado WHERE email = ? LIMIT 1;',
+        [email],
+        function (err, results) {
+            if (err) {
+                console.log(err);
+            } else {
+                // If the results are empty, no user was found for the email.
+                if (!results[0]) {
+                    console.log("No user found for that email.");
+                } else {
+                    // If the email was found in the database, check if the password matches.s
+                    console.log(results);
+                    if (password === results[0].password) {
+                        // If the password doesn't match, show error.
+                        console.log("Successfull login!");
+                        mainWindow.loadFile("products.html");
+                    } else {
+                        // If the passwords match, load the products page.
+                        console.log("Login failed. Wrong password.");
+                    }
+                }
+            }
+        }
+    )
+});
+
+ipcMain.on('getProductsFromDB', function () {
+    connection.query(
+        'SELECT * FROM producto;',
+        function (err, results) {
+            mainWindow.webContents.send('productsFromDB', results);
+        }
+    );
+});
+
+ipcMain.on('updateProduct', function (event, product) {
+    connection.query(
+        'UPDATE producto SET nombre = ?, descripción = ?, categoría = ?, existencia = ? WHERE sku = ?;',
+        [product.name, product.description, product.category, product.stock, product.sku],
+        function (err) {
+            if (err) {
+                console.log(err);
+            } else {
+                // Close the edit window, reload the products window.
+                mainWindow.reload();
+                editWindow.close();
+            }
+        }
+    )
+});
+
+ipcMain.on('insertNewOrder', function (event, order) {
+    connection.query(
+        'INSERT INTO pedido (sku, cantidad, proveedor) VALUES (?,?,?)',
+        [order.sku, order.quantity, order.provider],
+        function (err) {
+            if (err) {
+                console.log(err);
+            }
+        }
+    )
 })
