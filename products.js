@@ -44,6 +44,11 @@ window.addEventListener("load", () => {
         row.classList.add("selected");
         // Make a product object and save it in our variable.
         selectedProduct = getProductObject(values);
+        // If the buttons are disabled, enable them.
+        if (newOrderButton.disabled) {
+          newOrderButton.disabled = false;
+          editButton.disabled = false;
+        }
       });
     });
 
